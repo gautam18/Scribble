@@ -1,0 +1,34 @@
+{% extends 'Entry/base.html' %}
+
+{% block title %}Entry Details {% endblock %}
+
+
+{% block body %}
+
+
+
+	<h3> {{entry.entry_name}}:</h3>
+	<h4><center>{{entry.entry_description}}</center></h4>
+	<h5>style:{{entry.entry_style}}</h5>
+
+	<h5>publish date:{{entry.entry_release_date}}</h5>
+	<h5>
+		<center>
+		<a  href="{% url 'Entry:like' entry.id %}">
+	        <button type="button" class="btn btn-success btn-xs">
+	        	<span class="glyphicon glyphicon-heart"></span>&nbsp; Like
+	        </button>
+	    </a>
+	    </center>
+	</h5>
+	<h5>	
+		<center>
+		<a  href="{% url 'Entry:bookmark' entry.id %}">
+	        <button type="button" class="btn btn-success btn-xs">
+	        	<span class="glyphicon glyphicon-bookmark"></span>&nbsp; Bookmark
+	        </button>
+	    </a>
+	    </center>
+	</h5>
+
+{% endblock %}

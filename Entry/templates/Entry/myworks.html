@@ -1,0 +1,76 @@
+
+{% extends 'Entry/base.html' %}
+<!-- {% block title %}Entry Index{% endblock %} -->
+
+{% block body %}
+
+
+
+      <div class="col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Style</th>
+                                    <th>Author</th>
+                                    <th>Details</th>
+                                    <th>Genres</th>
+                                    <th>Action 1</th>
+                                    <th>Action 2</th>
+                                    <th>Release Date and Time<th>
+                                    
+                                    
+                                
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for entry in entry_list %}
+                                    {% if entry.entry_writer_id.username == request.user.username %}
+
+                                        <tr>
+                                            <td>{{ entry.entry_name }}</td>
+                                            <td>{{entry.entry_style}}</td>
+                                            <td>{{ entry.entry_writer_id.username }}</td>
+                                            
+                                            <td>
+                                                <a  href="{% url 'Entry:detail' entry.id %}">
+                                                    <button type="button" class="btn btn-success btn-xs">
+                                                        <span class="glyphicon glyphicon-zoom-in"></span>&nbsp; View
+                                                    </button>
+                                                </a>
+                                            </td>
+                                            <td>{{ entry.entry_genres.all }}</td>
+                                            <td>
+                                                <a  href="{% url 'Entry:entry-update' entry.id %}">
+                                                    <button type="button" class="btn btn-success btn-xs">
+                                                        <span class="glyphicon glyphicon-edit"></span>&nbsp; Update
+                                                    </button>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a  href="{% url 'Entry:entry-delete' entry.id %}">
+                                                    <button type="button" class="btn btn-success btn-xs">
+                                                        <span class="glyphicon glyphicon-trash"></span>&nbsp; Delete
+                                                    </button>
+                                                </a>
+                                            </td>
+
+                                            <td>{{entry.entry_release_date}}</td>
+                                    
+                                      
+                                        </tr>
+                                    {% endif %}
+                                    
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+       </div>
+    
+
+{% endblock %}
+

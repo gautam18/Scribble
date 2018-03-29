@@ -1,0 +1,161 @@
+
+{% extends 'Entry/base.html' %}
+{% load login_extras %}
+
+
+<!-- {% block title %}Entry Index{% endblock %} -->
+{% block user %}
+
+<p>Hi {{ request.user.username }}!</p>
+
+{% endblock %}
+
+{% block body %}
+
+
+
+      <div class="col-sm-12">
+      			{% if request.user|has_group:"User" %}
+	                <div class="panel panel-default">
+	                    <div class="panel-body">
+	                        <table class="table">
+	                            <thead>
+	                                <tr>
+	                                    <th>Title</th>
+	                                    <th>Style</th>
+	                                    <th>Author</th>
+	                                    <th>Details</th>
+	                                    <th>Genres</th>
+	                                    <th>Release Date and Time<th>
+	                                    
+	                                    
+	                                
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                {% for entry in entry_list %}
+
+	                                    <tr>
+	                                        <td>{{ entry.entry_name }}</td>
+	                                        <td>{{entry.entry_style}}</td>
+	                                        <td>
+	                                        	<a href="{% url 'Entry:userdetail' entry.entry_writer_id.id %}">
+	                                        		<button type="button" class="btn btn-success btn-xs">
+	                                                    <span class="glyphicon glyphicon-user"></span>&nbsp; 
+	                                                    {{ entry.entry_writer_id.username }}
+	                                                </button>
+	                                            </a>
+
+	                                        	
+	                                        </td>
+
+	                                        
+	                                        <td>
+	                                            <a  href="{% url 'Entry:detail' entry.id %}">
+	                                                <button type="button" class="btn btn-success btn-xs">
+	                                                    <span class="glyphicon glyphicon-zoom-in"></span>&nbsp; View
+	                                                </button>
+	                                            </a>
+	                                        </td>
+
+	                                        <td>{{ entry.entry_genres.all }}</td>
+	                                        <td>{{entry.entry_release_date}}</td>
+	                                 
+	                                      
+	                                    </tr>
+	                                {% endfor %}
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                </div>
+
+	            {% else %}
+
+
+	            <div class="panel panel-default">
+	                    <div class="panel-body">
+	                        <table class="table">
+	                            <thead>
+	                                <tr>
+	                                    <th>Title</th>
+	                                    <th>Style</th>
+	                                    <th>Author</th>
+	                                    <th>Details</th>
+	                                    <th>Genres</th>
+	                                    <th>Action</th>
+	                                    <th>Release Date and Time<th>
+	                                    
+	                                    
+	                                
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                {% for entry in entry_list %}
+
+	                                    <tr>
+	                                        <td>{{ entry.entry_name }}</td>
+	                                        <td>{{entry.entry_style}}</td>
+	                                        <td>
+	                                        	<a href="{% url 'Entry:userdetail' entry.entry_writer_id.id %}">
+	                                        		<button type="button" class="btn btn-success btn-xs">
+	                                                    <span class="glyphicon glyphicon-user"></span>&nbsp; 
+	                                                    {{ entry.entry_writer_id.username }}
+	                                                </button>
+	                                            </a>
+
+	                                        	
+	                                        </td>
+
+	                                        
+	                                        <td>
+	                                            <a  href="{% url 'Entry:detail' entry.id %}">
+	                                                <button type="button" class="btn btn-success btn-xs">
+	                                                    <span class="glyphicon glyphicon-zoom-in"></span>&nbsp; View
+	                                                </button>
+	                                            </a>
+	                                        </td>
+
+	                                        <td>{{ entry.entry_genres.all }}</td>
+
+	                                        <td>
+	                                        	{% if request.user != entry.entry_writer_id %}
+
+	                                        	<form class="rating" role="search" method="get" action="#">
+	                                        		<div class="form-group">
+        											<input type="text" class="form-control" name="rating_box" value="">
+        											</div>
+		                                            <a  href="#">
+		                                                <button type="button" class="btn btn-success btn-xs">
+		                                                    <span class="glyphicon glyphicon-star"></span>&nbsp; Rate
+		                                                </button>
+		                                            </a>
+		                                        </form>
+
+		                                      
+
+
+		                                        {% else %}
+
+		                                        	<p>--</p>
+
+
+		                                        {% endif %}
+
+	                                        </td>
+	                                        <td>{{entry.entry_release_date}}</td>
+	                                 
+	                                      
+	                                    </tr>
+	                                {% endfor %}
+	                            </tbody>
+	                        </table>
+	                    </div>
+	                </div>
+
+	            {% endif %}
+            
+       </div>
+    
+
+{% endblock %}
+
