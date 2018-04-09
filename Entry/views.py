@@ -170,7 +170,7 @@ class EntryDelete(LoginRequiredMixin,DeleteView):
 
 class LoginFormView(View):
 	form_class=LoginForm
-	template_name='Entry/login_index.html'
+	template_name='Lab/login.html'
 
 	#display blank form	
 	def get(self,request):
@@ -209,7 +209,7 @@ class LoginFormView(View):
 	
 
 class UserFormView(View):
-	template_name='Entry/registration_index.html'
+	template_name='Lab/registration.html'
 
 
 
